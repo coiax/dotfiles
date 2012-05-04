@@ -1,0 +1,1 @@
+/home/coiax/bin/bzr-vim/ftplugin/bzrlog.vim
