@@ -1,0 +1,35 @@
+use_xft yes
+xftfont verdana:size=8
+alignment bottom_left
+xftalpha 0.8
+own_window yes
+own_window_type override
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+draw_shades no
+draw_outline no
+draw_borders no
+stippled_borders 10
+border_margin 4
+border_width 1
+default_shade_color grey
+default_outline_color black
+default_color E6D3DF
+use_spacer none
+no_buffers yes
+uppercase no
+color1 A06D8C
+color2 E6D3DF
+update_interval 0.5
+
+
+
+TEXT
+${color}${font Monospace:size=20}$nodename$font
+Memory: $mem
+Downspeed: ${downspeed eth1}/${downspeed eth0} kB/s
+Upspeed: ${upspeed eth1}/${upspeed eth0} kB/s
+Entropy: $entropy_avail units
+Uptime: $uptime
+Battery: ${battery_percent}%
