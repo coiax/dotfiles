@@ -5,7 +5,7 @@ set wildmode=longest,list
 set mouse=a
 
 " Ledger
-au BufNewFile,BufRead .journal setf ledger | comp ledger
+" au BufNewFile,BufRead .journal setf ledger | comp ledger
 
 
 " color tastic
@@ -21,8 +21,8 @@ set smarttab
 filetype plugin indent on
 filetype plugin on
 
-autocmd FileType python
-autocmd FileType java set noautoindent
+"autocmd FileType python
+"autocmd FileType java set noautoindent
 " trailing whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+\%#\@<!$/
