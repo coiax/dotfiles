@@ -9,3 +9,5 @@ zstyle :compinstall filename '/home/coiax/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+set -o vi # why not

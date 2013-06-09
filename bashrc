@@ -109,8 +109,8 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-export PATH=$PATH:~/Source/android-sdk-linux_86/tools
-export PATH=$PATH:~/Source/android-sdk-linux_86/platform-tools
+export PATH=$PATH:~/Source/android-sdk-linux/tools
+export PATH=$PATH:~/Source/android-sdk-linux/platform-tools
 export EDITOR='vim'
 
 #source ~/.Xdbus
@@ -118,3 +118,7 @@ export EDITOR='vim'
 
 #cmatrix -bas -C yellow
 alias mtr='mtr -i 5'
+
+# make mosh autocomplete ssh
+ssh_complete=$(complete -p ssh)
+eval "$ssh_complete mosh"
