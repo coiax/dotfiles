@@ -21,13 +21,13 @@ no_buffers yes
 uppercase no
 color1 A06D8C
 color2 E6D3DF
-update_interval 0.5
+update_interval 3.0
 
 
 
 TEXT
 ${color}${font Monospace:size=20}$nodename$font
-Memory: $mem
+Memory: $mem used
 Downspeed: ${downspeed eth1}/${downspeed eth0} kB/s
 Upspeed: ${upspeed eth1}/${upspeed eth0} kB/s
 Entropy: $entropy_avail units

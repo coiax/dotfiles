@@ -114,7 +114,7 @@ export PATH=$PATH:~/Source/android-sdk-linux/platform-tools
 export EDITOR='vim'
 
 #source ~/.Xdbus
-[[ -f "/home/coiax/.config/autopackage/paths-bash" ]] && . "/home/coiax/.config/autopackage/paths-bash"
+#[[ -f "/home/coiax/.config/autopackage/paths-bash" ]] && . "/home/coiax/.config/autopackage/paths-bash"
 
 #cmatrix -bas -C yellow
 alias mtr='mtr -i 5'
@@ -122,3 +122,23 @@ alias mtr='mtr -i 5'
 # make mosh autocomplete ssh
 ssh_complete=$(complete -p ssh)
 eval "$ssh_complete mosh"
+
+export TERM=xterm-256color
+source ~/Source/gitignore-boilerplates/gibo-completion.bash
+
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Source
+source /usr/local/bin/virtualenvwrapper.sh
+
+has_virtualenv() {
+    if [ -e .venv ]; then
+        workon `cat .venv`
+    fi
+}
+venv_cd () {
+    builtin cd "$@" && has_virtualenv
+}
+alias cd="venv_cd"
+
+# Starting .bashrc, auto enter virtualenv if one is present.
+has_virtualenv
