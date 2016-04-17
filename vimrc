@@ -1,9 +1,3 @@
-set runtimepath=~/.vim,$VIMRUNTIME
-source ~/.vim/vimrc
-syntax on
-set wildmode=longest,list
-set mouse=a
-
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -20,6 +14,7 @@ Plugin 'VundleVim/Vundle.vim'
 " " Keep Plugin commands between vundle#begin/end.
 " " plugin on GitHub repo
 " Plugin 'tpope/vim-fugitive'
+Plugin 'wlue/vim-dm-syntax'
 " " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " " Git plugin not hosted on GitHub
@@ -49,6 +44,11 @@ filetype plugin indent on    " required
 " "
 " " see :h vundle for more details or wiki for FAQ
 " " Put your non-Plugin stuff after this line
+
+syntax on
+set wildmode=longest,list
+set mouse=a
+
 "
 " Ledger
 " au BufNewFile,BufRead .journal setf ledger | comp ledger
