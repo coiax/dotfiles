@@ -25,7 +25,7 @@ shopt -s checkwinsize
 
 # git-dirty-prompt
 function parse_git_dirty {
-  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit, working directory clean" ]] && echo "*"
   }
 function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
@@ -120,15 +120,19 @@ export EDITOR='vim'
 alias mtr='mtr -i 5'
 
 # make mosh autocomplete ssh
-ssh_complete=$(complete -p ssh)
-eval "$ssh_complete mosh"
+#ssh_complete=$(complete -p ssh)
+#eval "$ssh_complete mosh"
 
 export TERM=xterm-256color
-source ~/Source/gitignore-boilerplates/gibo-completion.bash
+if [ -f ~/Source/gitignore-boilerplates/gibo-completion.bash ]; then
+    source ~/Source/gitignore-boilerplates/gibo-completion.bash
+fi
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Source
-source /usr/local/bin/virtualenvwrapper.sh
+if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
 
 has_virtualenv() {
     if [ -e .venv ]; then
@@ -138,7 +142,7 @@ has_virtualenv() {
 venv_cd () {
     builtin cd "$@" && has_virtualenv
 }
-alias cd="venv_cd"
+#alias cd="venv_cd"
 
 # Starting .bashrc, auto enter virtualenv if one is present.
-has_virtualenv
+#has_virtualenv
