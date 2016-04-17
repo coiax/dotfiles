@@ -8,3 +8,5 @@
 	main-window-view = HistoryView
 	show-graph = true
 	file-view-vpane-position = 651
+[push]
+	default = simple
