@@ -4,3 +4,6 @@
 [submodule "vim/bundle/vim-dm-syntax"]
 	path = vim/bundle/vim-dm-syntax
 	url = https://github.com/wlue/vim-dm-syntax
+[submodule "vim/bundle/vim-mustache-handlebars"]
+	path = vim/bundle/vim-mustache-handlebars
+	url = https://github.com/mustache/vim-mustache-handlebars.git
