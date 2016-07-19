@@ -16,6 +16,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'tpope/vim-fugitive'
 Plugin 'wlue/vim-dm-syntax'
 Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'sheerun/vim-polyglot'
 " " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " " Git plugin not hosted on GitHub
@@ -54,6 +55,8 @@ set mouse=a
 " Ledger
 " au BufNewFile,BufRead .journal setf ledger | comp ledger
 
+" Screeps
+au BufRead,BufNewFile *screeps*.js set syntax=screeps
 
 " color tastic
 color delek
@@ -67,3 +70,8 @@ match ExtraWhitespace /\s\+\%#\@<!$/
 " highlight over 80 characters
 "highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 "match OverLength /\%81v.\+/
+"
+"" parse .ract files as coffeescript
+au BufNewFile,BufRead *.ract set filetype=mustache
+
+au Filetype mustache setlocal shiftwidth=2 tabstop=2 expandtab
