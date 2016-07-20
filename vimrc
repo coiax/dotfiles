@@ -56,8 +56,8 @@ set mouse=a
 " au BufNewFile,BufRead .journal setf ledger | comp ledger
 
 " Screeps
-"au BufRead,BufNewFile *screeps*.js set syntax=screeps
-
+au BufRead,BufNewFile *.screeps set syntax=screeps
+au Syntax screeps setlocal shiftwidth=4 tabstop=4 expandtab smarttab softtabstop=4
 " color tastic
 color delek
 
