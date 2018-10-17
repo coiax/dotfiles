@@ -1,0 +1,89 @@
+#!/usr/bin/python3
+
+# Because what are dotfiles for other than writing your own custom
+# script.
+
+# This needs to be put in the base folder of the dotfiles,
+# it assumes that.
+
+import argparse
+import builtins
+import os
+import os.path
+import shutil
+import subprocess
+import sys
+
+def file_is_this_script(filename):
+    path = os.path.realpath(__file__)
+    return os.path.realpath(filename) == path
+
+
+def make_parser():
+    p = argparse.ArgumentParser()
+    p.add_argument('-n','--dry-run',action='store_true',default=False,help="print what would be done, but don't actually do it")
+    p.add_argument('-o','--overwrite',action='store_true',default=False,help="overwrite any existing files with the symbolic links")
+    p.add_argument('--destination',default='..',help="where the symbolic links will be created, relative to the script's location")
+    return p
+
+def change_to_script_dir():
+    path = os.path.realpath(__file__)
+    dir = os.path.dirname(path)
+
+    os.chdir(dir)
+
+def setup_git_submodules(ns):
+    git_cmds = ["git submodule init", "git submodule update"]
+    for c in git_cmds:
+        print("$ {}".format(c))
+        if not ns.dry_run:
+            subprocess.run(c, shell=True)
+
+def list_dotfiles():
+    cwd = os.getcwd()
+    paths = []
+    for item in os.listdir(cwd):
+        if item.startswith(".") or item.endswith("~"):
+            continue
+        joined = os.path.join(cwd, item)
+        if not file_is_this_script(joined):
+            paths.append(joined)
+
+    return paths
+
+def make_symbolic_links(ns, paths):
+    destination = os.path.relpath(ns.destination, start=os.getcwd())
+
+    for path in paths:
+        name = os.path.basename(path)
+        link_name = ".{}".format(name)
+        link_path = os.path.join(destination, link_name)
+        link_realpath = os.path.realpath(link_path)
+
+        if os.path.exists(link_path):
+            if not ns.overwrite:
+                fmt = "{} exists, use '-o' to overwrite existing files."
+                print(fmt.format(link_path))
+                continue
+            else:
+                print("Removing {}".format(link_path))
+                if not ns.dry_run:
+                    if os.path.islink(link_path):
+                        os.remove(link_path)
+                    elif os.path.isdir(link_path):
+                        shutil.rmtree(link_path)
+                    else:
+                        os.remove(link_path)
+
+        print("{} -> {}".format(name, link_path))
+        if not ns.dry_run:
+            os.symlink(path, link_path)
+
+if __name__=='__main__':
+    ns = make_parser().parse_args()
+
+    change_to_script_dir()
+    setup_git_submodules(ns)
+
+    filenames = list_dotfiles()
+    make_symbolic_links(ns, filenames)
