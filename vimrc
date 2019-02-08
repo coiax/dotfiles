@@ -17,6 +17,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'wlue/vim-dm-syntax'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'sheerun/vim-polyglot'
+Plugin 'tpope/vim-eunuch'
 " " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " " Git plugin not hosted on GitHub
