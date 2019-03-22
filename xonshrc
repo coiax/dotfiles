@@ -27,4 +27,9 @@ def _hostname_colour():
 # Also, -q because it's noisy.
 aliases['gdb'] = 'env SHELL=/bin/bash gdb -q'
 
+# Terminal escape sequences are neat.
+aliases['resizeterm'] = """printf '\e[8;24;80t'"""
+
 $PROMPT = '{env_name:{} }{NO_COLOR}{user}@{' + _hostname_colour() + '}{hostname}{NO_COLOR}:{BOLD_BLUE}{cwd}{NO_COLOR}{gitstatus:[{}]}{NO_COLOR}{prompt_end} '
+
+$EDITOR = 'vim'
