@@ -17,6 +17,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'wlue/vim-dm-syntax'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'sheerun/vim-polyglot'
+Plugin 'tpope/vim-eunuch'
+Plugin 'chr4/nginx.vim'
 " " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " " Git plugin not hosted on GitHub
@@ -75,3 +77,6 @@ match ExtraWhitespace /\s\+\%#\@<!$/
 au BufNewFile,BufRead *.ract set filetype=mustache
 
 au Filetype mustache setlocal shiftwidth=2 tabstop=2 expandtab
+
+" :w!! to save as root.
+cmap w!! SudoWrite
