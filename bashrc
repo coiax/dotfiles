@@ -141,6 +141,10 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+if [ -f ~/.bashrc.local ]; then
+    . ~/.bashrc.local
+fi
+
 export EDITOR=vim
 export VISUAL=$EDITOR
 export GIT_EDITOR=$EDITOR
