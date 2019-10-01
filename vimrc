@@ -14,11 +14,16 @@ Plugin 'VundleVim/Vundle.vim'
 " " Keep Plugin commands between vundle#begin/end.
 " " plugin on GitHub repo
 " Plugin 'tpope/vim-fugitive'
+
 Plugin 'wlue/vim-dm-syntax'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'tpope/vim-eunuch'
 Plugin 'chr4/nginx.vim'
+Plugin 'sbdchd/neoformat'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'https://gitlab.com/gi1242/vim-emoji-ab.git'
+Plugin 'airblade/vim-gitgutter'
 " " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " " Git plugin not hosted on GitHub
@@ -49,34 +54,27 @@ filetype plugin indent on    " required
 " " see :h vundle for more details or wiki for FAQ
 " " Put your non-Plugin stuff after this line
 
-syntax on
+" A sane way to autocomplete filenames
 set wildmode=longest,list
+
+" Not actually the default in Ubuntu's Vim
 set mouse=a
 
-"
-" Ledger
-" au BufNewFile,BufRead .journal setf ledger | comp ledger
+" The unnamed default register will go to the system's clipboard
+set clipboard=unnamedplus
 
-" Screeps
-au BufRead,BufNewFile *.screeps set syntax=screeps
-au Syntax screeps setlocal shiftwidth=4 tabstop=4 expandtab smarttab softtabstop=4
-" color tastic
+" I've found that delek is the best colour scheme for me.
 color delek
 
-"autocmd FileType python
-"autocmd FileType java set noautoindent
-" trailing whitespace
+" Highlight trailing whitespace in AGGRESSIVE ANGRY RED
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+\%#\@<!$/
 
-" highlight over 80 characters
-"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-"match OverLength /\%81v.\+/
-"
-"" parse .ract files as coffeescript
-au BufNewFile,BufRead *.ract set filetype=mustache
-
-au Filetype mustache setlocal shiftwidth=2 tabstop=2 expandtab
-
 " :w!! to save as root.
 cmap w!! SudoWrite
+
+" Enable shortcodes like :fire: -> 🔥 in git commits
+autocmd FileType gitcommit runtime macros/emoji-ab.vim
+
+" vim-gitgutter recommends that we increase vim's updatetime option
+set updatetime=100
