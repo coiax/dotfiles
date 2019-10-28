@@ -78,3 +78,5 @@ autocmd FileType gitcommit runtime macros/emoji-ab.vim
 
 " vim-gitgutter recommends that we increase vim's updatetime option
 set updatetime=100
+
+set hlsearch
