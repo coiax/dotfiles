@@ -79,4 +79,8 @@ autocmd FileType gitcommit runtime macros/emoji-ab.vim
 " vim-gitgutter recommends that we increase vim's updatetime option
 set updatetime=100
 
+" Enable highlighting when searching for text
 set hlsearch
+
+" Disable code folding
+set nofoldenable

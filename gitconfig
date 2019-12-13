@@ -12,3 +12,4 @@
 	default = simple
 [alias]
 	upstream = !git checkout master && git fetch --tags upstream master && git merge --ff-only upstream/master && git push
+	cleanup = !git-cleanup
