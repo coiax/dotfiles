@@ -75,6 +75,7 @@ cmap w!! SudoWrite
 
 " Enable shortcodes like :fire: -> 🔥 in git commits
 autocmd FileType gitcommit runtime macros/emoji-ab.vim
+autocmd BufRead,BufNewFile *.pyi setfiletype python
 
 " vim-gitgutter recommends that we increase vim's updatetime option
 set updatetime=100
