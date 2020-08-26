@@ -12,4 +12,7 @@
 	default = simple
 [alias]
 	upstream = !git checkout master && git fetch --tags upstream master && git merge --ff-only upstream/master && git push
-	cleanup = !git-cleanup
+	cleanup = !echo "Just run $ git fetch --prune"
+	origin-diff = !echo 'Did you mean:\n$ git diff $(git merge-base --fork-point master)'
+	local-branches = !git branch -vv | cut -c 3- | awk '$3 !~/\\[/ { print $1 }'
+	sed = !git grep -l $1 | xargs sed -i "" -e "s/$1/$2/g" && echo > /dev/null
