@@ -85,3 +85,7 @@ set hlsearch
 
 " Disable code folding
 set nofoldenable
+
+" When editing javascript, typescript, scss run prettier on save
+" Prettier must be installed globally for this to work
+autocmd BufWritePre *.ts,*.js,*.scss Neoformat prettier
