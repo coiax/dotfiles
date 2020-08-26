@@ -146,6 +146,31 @@ export VISUAL=$EDITOR
 export GIT_EDITOR=$EDITOR
 export PATH=$HOME/.local/bin:$HOME/bin:$PATH
 
+# Print a random #pypy IRC topic at the start of interactive mode
+export PYPY_IRC_TOPIC=1
+
+# If we're running in a TTY, modify the colours used
+# https://askubuntu.com/questions/147462/how-can-i-change-the-tty-colors
+if [ "$TERM" = "linux" ]; then
+    echo -en "\e]P0000000" #black
+    echo -en "\e]P82B2B2B" #darkgrey
+    echo -en "\e]P1D75F5F" #darkred
+    echo -en "\e]P9E33636" #red
+    echo -en "\e]P287AF5F" #darkgreen
+    echo -en "\e]PA98E34D" #green
+    echo -en "\e]P3D7AF87" #brown
+    echo -en "\e]PBFFD75F" #yellow
+    echo -en "\e]P48787AF" #darkblue
+    echo -en "\e]PC7373C9" #blue
+    echo -en "\e]P5BD53A5" #darkmagenta
+    echo -en "\e]PDD633B2" #magenta
+    echo -en "\e]P65FAFAF" #darkcyan
+    echo -en "\e]PE44C9C9" #cyan
+    echo -en "\e]P7E5E5E5" #lightgrey
+    echo -en "\e]PFFFFFFF" #white
+#    clear #for background artifacting
+fi
+
 if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local
 fi
