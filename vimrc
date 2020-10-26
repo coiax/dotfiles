@@ -24,6 +24,10 @@ Plugin 'sbdchd/neoformat'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'https://gitlab.com/gi1242/vim-emoji-ab.git'
 Plugin 'airblade/vim-gitgutter'
+
+" Plugin to provide syntax highlighting for Xonsh files.
+Plugin 'meatballs/vim-xonsh'
+
 " " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " " Git plugin not hosted on GitHub

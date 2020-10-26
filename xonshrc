@@ -1,14 +1,31 @@
-#!/usr/bin/python3
-## That's just there so vim's filetype editing
+import pathlib
 
-import os
-import platform
-import random
-
-xontrib load bashisms
+# Vox allows for virtual environments inside xonsh
 xontrib load vox
 
+# Standard global variables that we're always a fan of
+HOME = pathlib.Path.home()
+
+# Set to True to enable full tracebacks when Xonsh has issues
+$XONSH_SHOW_TRACEBACK = False
+
+# Use vim for everything
+$EDITOR = 'vim'
+$VISUAL = $EDITOR
+$GIT_EDITOR = $EDITOR
+
+# Add some common bin directories to the $PATH
+$PATH = [HOME / ".local/bin", HOME / "bin"] + $PATH
+
+# Print a random #pypy IRC topic at the start of pypy interactive mode
+$PYPY_IRC_TOPIC = True
+
+# Random colours for the hostnames, that depend on the hostname itself
+
 def _hostname_colour():
+    import random
+    import platform
+
     r = random.Random()
     r.seed(platform.node())
 
@@ -21,15 +38,72 @@ def _hostname_colour():
     if is_bold:
         colour = "BOLD_" + colour
 
-    return colour
+    return "".join(("{", colour, "}"))
 
-# Gdb won't run properly unless it has the SHELL var set to /bin/bash
-# Also, -q because it's noisy.
-aliases['gdb'] = 'env SHELL=/bin/bash gdb -q'
 
-# Terminal escape sequences are neat.
-aliases['resizeterm'] = """printf '\e[8;24;80t'"""
+def _git_branch() -> str:
+    """Using the `git branch` command, return the name of the current
+    checked out branch. During a detached HEAD situation, can return
+    "(HEAD detached at abcdef123)"
+    """
+    import subprocess
+    cp = subprocess.run(
+        ["git", "branch", "--no-color"],
+        capture_output=True,
+        encoding="utf-8"
+    )
+    if cp.returncode != 0:
+        return ""
 
-$PROMPT = '{env_name:{} }{NO_COLOR}{user}@{' + _hostname_colour() + '}{hostname}{NO_COLOR}:{BOLD_BLUE}{cwd}{NO_COLOR}{gitstatus:[{}]}{NO_COLOR}{prompt_end} '
+    branches = cp.stdout.strip().split("\n")
+    for branch in branches:
+        if branch.startswith("* "):
+            return branch[2:]
 
-$EDITOR = 'vim'
+    return ""
+
+
+def _prompt():
+    import subprocess
+    from xonsh.prompt.gitstatus import gitstatus
+
+    col = _hostname_colour()
+    parts = [
+        "{env_name:{}}{NO_COLOR}",
+        "{user}@",
+        col,
+        "{hostname}{NO_COLOR}",
+        ":{BOLD_BLUE}{cwd}{NO_COLOR}",
+    ]
+
+    try:
+        gc = gitstatus()
+    except subprocess.CalledProcessError:
+        gc = None
+
+    if gc is not None:
+        dirty = gc.untracked or gc.changed or gc.deleted or gc.staged
+
+        current_branch = _git_branch()
+
+        if dirty:
+            parts.append(f"[{current_branch}*]")
+        else:
+            parts.append(f"[{current_branch}]")
+
+    parts.append("{prompt_end} ")
+    return "".join(parts)
+
+
+$PROMPT = _prompt
+
+# Load .xonsh.local.py, if it exists
+# The .py is required, otherwise xonsh thinks we're trying to load
+# a non-xonsh file.
+
+local_xonsh = HOME / ".xonshrc.local.py"
+
+if local_xonsh.exists():
+    source @(local_xonsh)
+
+# vim: set ft=python:
