@@ -20,7 +20,6 @@ Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'tpope/vim-eunuch'
 Plugin 'chr4/nginx.vim'
-Plugin 'sbdchd/neoformat'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'https://gitlab.com/gi1242/vim-emoji-ab.git'
 Plugin 'airblade/vim-gitgutter'
@@ -90,6 +89,7 @@ set hlsearch
 " Disable code folding
 set nofoldenable
 
-" When editing javascript, typescript, scss run prettier on save
-" Prettier must be installed globally for this to work
-autocmd BufWritePre *.ts,*.js,*.scss Neoformat prettier
+" Turn off editor config line limiting, it makes syntax dumb
+let g:EditorConfig_disable_rules = ['max_line_length']
+
+set number
